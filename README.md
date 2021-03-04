@@ -1,7 +1,11 @@
 # konverter_suhu
 HASIL SCREENSHOT
-- JOBSHEET 4
+<p>JOBSHEET 4 </p>
 ![.Plot](./image/gambar3.jpeg)
+
+<p>JOBSHEET 3 </p>
+![.Plot](./image/Gambar1.jpeg)
+![.Plot](./image/Gambar2.jpeg)
 
 A new Flutter project.
 
@@ -18,5 +22,4 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-![.Plot](./image/Gambar1.jpeg)
-![.Plot](./image/Gambar2.jpeg)
+
