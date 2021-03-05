@@ -4,6 +4,7 @@ import 'Input.dart';
 import 'Result.dart';
 import 'Convert.dart';
 import 'Riwayat.dart';
+import 'DropdownKonversi.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,13 +18,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   double _inputUser = 0;
-  double _kelvin = 0;
+  double _kelvin = 0; //inisialisasi
   double _reamur = 0;
   double _fahrenheit = 0;
-  final inputController = TextEditingController();
+  final inputController =
+      TextEditingController(); //memanggil nilai variabel/widget
   String _newValue = "Kelvin";
   double _result = 0;
-  List<String> listViewItem = List<String>();
+  List<String> listViewItem = List<String>(); //instansiasi
   var listItem = ["Kelvin", "Reamur", "Fahrenheit"];
 
   void perhitunganSuhu() {
@@ -37,6 +39,13 @@ class _MyAppState extends State<MyApp> {
         _result = ((9 / 5) * _inputUser) + 32;
     });
     listViewItem.add("$_newValue : $_result");
+  }
+
+  void dropdownOnChanged(String changeValue) {
+    setState(() {
+      _newValue = changeValue;
+      perhitunganSuhu();
+    });
   }
 
   @override
@@ -57,21 +66,10 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Input(inputUserController: inputController),
-              DropdownButton<String>(
-                items: listItem.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                value: _newValue,
-                onChanged: (String changeValue) {
-                  setState(() {
-                    _newValue = changeValue;
-                    perhitunganSuhu();
-                  });
-                },
-              ),
+              dropdownKonversi(
+                  listItem: listItem,
+                  newValue: _newValue,
+                  dropdownOnChanged: dropdownOnChanged),
               Result(result: _result),
               Convert(konvertHandler: perhitunganSuhu),
               Container(
