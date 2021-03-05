@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'Input.dart';
 import 'Result.dart';
 import 'Convert.dart';
-import 'Riwayat.dart';
-import 'DropdownKonversi.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,33 +16,18 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   double _inputUser = 0;
-  double _kelvin = 0; //inisialisasi
+
+  double _kelvin = 0;
+
   double _reamur = 0;
-  double _fahrenheit = 0;
-  final inputController =
-      TextEditingController(); //memanggil nilai variabel/widget
-  String _newValue = "Kelvin";
-  double _result = 0;
-  List<String> listViewItem = List<String>(); //instansiasi
-  var listItem = ["Kelvin", "Reamur", "Fahrenheit"];
 
-  void perhitunganSuhu() {
-    setState(() {
-      _inputUser = double.parse(inputController.text);
-      if (_newValue == "Kelvin")
-        _result = _inputUser + 273;
-      else if (_newValue == "Reamur")
-        _result = (4 / 5) * _inputUser;
-      else
-        _result = ((9 / 5) * _inputUser) + 32;
-    });
-    listViewItem.add("$_newValue : $_result");
-  }
+  TextEditingController inputUserController = TextEditingController();
 
-  void dropdownOnChanged(String changeValue) {
+  void _konverterSuhu() {
     setState(() {
-      _newValue = changeValue;
-      perhitunganSuhu();
+      _inputUser = double.parse(inputUserController.text);
+      _reamur = (4 / 5) * _inputUser;
+      _kelvin = 273 + _inputUser;
     });
   }
 
@@ -65,23 +48,9 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Input(inputUserController: inputController),
-              dropdownKonversi(
-                  listItem: listItem,
-                  newValue: _newValue,
-                  dropdownOnChanged: dropdownOnChanged),
-              Result(result: _result),
-              Convert(konvertHandler: perhitunganSuhu),
-              Container(
-                margin: EdgeInsets.only(top: 10, bottom: 10),
-                child: Text(
-                  "Riwayat Konversi",
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              Expanded(
-                child: Riwayat(listViewItem: listViewItem),
-              ),
+              Input(inputUserController: inputUserController),
+              Result(kelvin: _kelvin, reamur: _reamur),
+              Convert(konvertHandler: _konverterSuhu),
             ],
           ),
         ),

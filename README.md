@@ -1,9 +1,5 @@
 # konverter_suhu
 HASIL SCREENSHOT
-<p>JOBSHEET 4 </p>
-
-![.Plot](./image/gambar3.jpeg)
-
 <p>JOBSHEET 3 </p>
 
 ![.Plot](./image/Gambar1.jpeg)
